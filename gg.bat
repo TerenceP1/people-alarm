@@ -1,0 +1,1 @@
+for /f "delims=" %%i in ('dir /a-d /b /s') do git add %%i

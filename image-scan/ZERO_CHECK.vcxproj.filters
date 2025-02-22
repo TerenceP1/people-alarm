@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\teren\Documents\Programming\AI_stuff\People_Alarm\image-scan\CMakeFiles\414a834b06adab3bbc2889696dbc1870\generate.stamp.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{F4CB2932-7A17-3D1E-91E0-E960723ACD59}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

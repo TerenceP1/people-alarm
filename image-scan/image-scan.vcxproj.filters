@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\teren\Documents\Programming\AI_stuff\People_Alarm\image-scan\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\teren\Documents\Programming\AI_stuff\People_Alarm\image-scan\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{34EDC6F2-0005-32AF-A84F-5B1D0BDFFE94}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

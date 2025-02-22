@@ -1,0 +1,3 @@
+C:/Users/teren/Documents/Programming/AI_stuff/People_Alarm/image-scan/CMakeFiles/image-scan.dir
+C:/Users/teren/Documents/Programming/AI_stuff/People_Alarm/image-scan/CMakeFiles/ALL_BUILD.dir
+C:/Users/teren/Documents/Programming/AI_stuff/People_Alarm/image-scan/CMakeFiles/ZERO_CHECK.dir
