@@ -46,3 +46,17 @@ kernel void trans(global matrix *a, global matrix *b) {
   int col = ind % a->cols;
   elem(b, col, row) = elem(a, row, col);
 }
+
+kernel void relu(global matrix *a, global matrix *b) {
+  // Leaky ReLU
+  int ind = get_global_id(0);
+  float itm = (&(a->data))[ind];
+  (&(b->data))[ind] = itm >= 0 ? itm : 0.01 * itm;
+}
+
+kernel void drelu(global matrix *a, global matrix *b) {
+  // Leaky ReLU's derivitive
+  int ind = get_global_id(0);
+  float itm = (&(a->data))[ind];
+  (&(b->data))[ind] = itm >= 0 ? 1 : 0.01;
+}
