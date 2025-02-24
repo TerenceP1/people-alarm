@@ -60,3 +60,10 @@ kernel void drelu(global matrix *a, global matrix *b) {
   float itm = (&(a->data))[ind];
   (&(b->data))[ind] = itm >= 0 ? 1 : 0.01;
 }
+
+kernel void clip(global matrix *a) {
+  // Gradient clipper
+  int ind = get_global_id(0);
+  float itm = (&(a->data))[ind];
+  (&(a->data))[ind] = itm >= 0 ? fmin(1.0f,itm): fmax(-1.0f,itm);
+}
