@@ -455,6 +455,46 @@ public:
         res.noDelete++;
         return res;
     }
+
+    Matrix relu()
+    {
+        if (!isLoaded)
+        {
+            load();
+        }
+        Matrix res(rows, cols, true);
+        cl_kernel kernel = clCreateKernel(
+            program,
+            "relu",
+            NULL);
+        clSetKernelArg(
+            kernel,
+            0,
+            sizeof(cl_mem),
+            &tBuf);
+        clSetKernelArg(
+            kernel,
+            1,
+            sizeof(cl_mem),
+            &(res.tBuf));
+        size_t wSz = rows * cols;
+        clEnqueueNDRangeKernel(
+            queue2,
+            kernel,
+            1,
+            NULL,
+            &wSz,
+            NULL,
+            0,
+            NULL,
+            NULL);
+        clFlush(queue2);
+        clFinish(queue2);
+        clReleaseKernel(kernel);
+        cout << "Pls no destructor here." << endl;
+        res.noDelete++;
+        return res;
+    }
 };
 
 string slurp(string nm)
@@ -595,7 +635,7 @@ int main(int argc, char **argv)
     {
         Matrix a(2, 2, false);
         Matrix b(2, 2, false);
-        a.data[0] = 1;
+        a.data[0] = -1;
         a.data[1] = 2;
         a.data[2] = 3;
         a.data[3] = 4;
@@ -606,7 +646,7 @@ int main(int argc, char **argv)
         a.load();
         b.load();
         cout << "Loaded!" << endl;
-        Matrix c = a.trans();
+        Matrix c = a.relu();
         c.gpuPull();
         cout << "Result: ";
         for (int i = 0; i < 4; i++)
