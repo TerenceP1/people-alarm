@@ -68,7 +68,7 @@ kernel void clip(global matrix *a) {
   (&(a->data))[ind] = itm >= 0 ? fmin(1.0f,itm): fmax(-1.0f,itm);
 }
 
-uint randomInt(int ind){
+uint randomInt(uint ind){
   // Uses xorshift and an LCG
   // LCG
   uint tmp=ind*1664525u+1013904223;
@@ -77,4 +77,9 @@ uint randomInt(int ind){
   tmp^=tmp>>17;
   tmp^=tmp<<5;
   return tmp;
+}
+
+kernel void heInit(global matrix* a, int nrs){
+  // He initialization
+  // nrs is number of neurons
 }
