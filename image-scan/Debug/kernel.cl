@@ -67,3 +67,14 @@ kernel void clip(global matrix *a) {
   float itm = (&(a->data))[ind];
   (&(a->data))[ind] = itm >= 0 ? fmin(1.0f,itm): fmax(-1.0f,itm);
 }
+
+uint randomInt(int ind){
+  // Uses xorshift and an LCG
+  // LCG
+  uint tmp=ind*1664525u+1013904223;
+  // xorshift
+  tmp^=tmp<<13;
+  tmp^=tmp>>17;
+  tmp^=tmp<<5;
+  return tmp;
+}
