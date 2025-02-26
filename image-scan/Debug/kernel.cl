@@ -76,6 +76,7 @@ uint randomInt(uint ind){
   tmp^=tmp<<13;
   tmp^=tmp>>17;
   tmp^=tmp<<5;
+  printf("random: %d\n",tmp);
   return tmp;
 }
 
