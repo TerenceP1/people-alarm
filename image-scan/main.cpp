@@ -542,7 +542,6 @@ public:
         {
             load();
         }
-        Matrix res(rows, cols, true);
         cl_kernel kernel = clCreateKernel(
             program,
             "heInit",
@@ -573,8 +572,6 @@ public:
         clFinish(queue2);
         clReleaseKernel(kernel);
         cout << "Pls no destructor here." << endl;
-        res.noDelete++;
-        return res;
     }
 };
 
