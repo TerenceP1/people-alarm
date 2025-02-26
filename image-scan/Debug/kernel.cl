@@ -84,8 +84,8 @@ kernel void heInit(global matrix* a, int nrs){
   // He initialization
   // nrs is number of neurons
   uint ind=get_global_id(0);
-  float u1=((float)(randomInt(ind)>>8))/(0x1000000f);
-  float u2=((float)(randomInt(ind*1664525u+1013904223u)>>8))/(0x1000000f);
+  float u1=((float)(randomInt(ind)>>8))/((float)0x1000000);
+  float u2=((float)(randomInt(ind*1664525u+1013904223u)>>8))/((float)0x1000000);
   printf("u1: %f",u1);
   printf("u2: %f",u2);
   (&(a->data))[ind]=sqrt(-2.0f*log(u1))*cospi(2.0f*u2)*sqrt(2.0f/((float)nrs));
