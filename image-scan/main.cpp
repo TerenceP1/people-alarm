@@ -573,6 +573,44 @@ public:
         clReleaseKernel(kernel);
         cout << "Pls no destructor here." << endl;
     }
+
+    void xInit()
+    {
+        if (!isLoaded)
+        {
+            load();
+        }
+        cl_kernel kernel = clCreateKernel(
+            program,
+            "xInit",
+            NULL);
+        clSetKernelArg(
+            kernel,
+            0,
+            sizeof(cl_mem),
+            &tBuf);
+        size_t wSz = rows * cols;
+        unsigned int twSz=wSz;
+        clSetKernelArg(
+            kernel,
+            1,
+            sizeof(unsigned int),
+            &twSz);
+        clEnqueueNDRangeKernel(
+            queue2,
+            kernel,
+            1,
+            NULL,
+            &wSz,
+            NULL,
+            0,
+            NULL,
+            NULL);
+        clFlush(queue2);
+        clFinish(queue2);
+        clReleaseKernel(kernel);
+        cout << "Pls no destructor here." << endl;
+    }
 };
 
 string slurp(string nm)
