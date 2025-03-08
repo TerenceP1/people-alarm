@@ -101,3 +101,10 @@ kernel void xInit(global matrix* a, int nrs){
   printf("u2: %f",u2);
   (&(a->data))[ind]=sqrt(-2.0f*log(u1))*cospi(2.0f*u2)*sqrt(1.0f/((float)nrs));
 }
+
+kernel void sig(global matrix *a, global matrix *b) {
+  // Sigmoid
+  int ind = get_global_id(0);
+  float itm = (&(a->data))[ind];
+  (&(b->data))[ind] = 1.0f / (1.0f + exp(itm));
+}
