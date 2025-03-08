@@ -108,3 +108,11 @@ kernel void sig(global matrix *a, global matrix *b) {
   float itm = (&(a->data))[ind];
   (&(b->data))[ind] = 1.0f / (1.0f + exp(-itm));
 }
+
+kernel void sig(global matrix *a, global matrix *b) {
+  // Sigmoid derivitive
+  int ind = get_global_id(0);
+  float itm = (&(a->data))[ind];
+  float tmp=1.0f / (1.0f + exp(-itm));
+  (&(b->data))[ind] = tmp * (1.0f - tmp);
+}
