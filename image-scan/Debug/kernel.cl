@@ -106,5 +106,5 @@ kernel void sig(global matrix *a, global matrix *b) {
   // Sigmoid
   int ind = get_global_id(0);
   float itm = (&(a->data))[ind];
-  (&(b->data))[ind] = 1.0f / (1.0f + exp(itm));
+  (&(b->data))[ind] = 1.0f / (1.0f + exp(-itm));
 }
