@@ -701,6 +701,20 @@ string slurp(string nm)
     return a.str();
 }
 
+void dump(Matrix a, string nm)
+{
+    ofstream fl(nm, ios::out | ios::app | ios::binary);
+    float* buf=new float[a.rows * a.cols + 2];
+    ((int*)buf)[0]=a.rows;
+    ((int*)buf)[1]=a.cols;
+    for (int i=0;i<a.rows*a.cols;i++){
+        buf[i+2]=a.data[i];
+    }
+    fl.write((char*)buf,(a.rows * a.cols + 2) * (sizeof(float)));
+    a.noDelete++;
+    delete[] buf;
+}
+
 int main(int argc, char **argv)
 {
     cout << "test\n";
@@ -844,6 +858,7 @@ int main(int argc, char **argv)
         cout << "Loaded!" << endl;
         Matrix c=a.dsig();
         c.gpuPull();
+        dump(c,"TEST.MTR");
         cout << "Result: ";
         for (int i = 0; i < 4; i++)
         {
