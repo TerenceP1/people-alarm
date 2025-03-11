@@ -552,7 +552,7 @@ public:
             sizeof(cl_mem),
             &tBuf);
         size_t wSz = rows * cols;
-        unsigned int twSz=wSz;
+        unsigned int twSz=4;
         clSetKernelArg(
             kernel,
             1,
@@ -856,11 +856,12 @@ int main(int argc, char **argv)
         a.load();
         b.load();
         cout << "Loaded!" << endl;
-        Matrix c=a.dsig();
+        Matrix c(100,100,true);
+        c.heInit();
         c.gpuPull();
         dump(c,"TEST.MTR");
         cout << "Result: ";
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 10000; i++)
         {
             cout << c.data[i] << " ";
         }
