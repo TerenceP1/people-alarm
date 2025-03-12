@@ -723,7 +723,7 @@ Matrix load(string fn){
     Matrix res(rows,cols,false);
     fl.read((char*)res.data,(sizeof(float))*rows*cols);
     res.noDelete++;
-    return res
+    return res;
 }
 
 int main(int argc, char **argv)
