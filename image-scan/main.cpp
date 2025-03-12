@@ -715,6 +715,17 @@ void dump(Matrix a, string nm)
     delete[] buf;
 }
 
+Matrix load(string fn){
+    ifstream fl(fn,ios::in | ios::binary);
+    int rows,cols;
+    fl.read((char*)(&rows), sizeof(int));
+    fl.read((char*)(&cols), sizeof(int));
+    Matrix res(rows,cols,false);
+    fl.read((char*)res.data,(sizeof(float))*rows*cols);
+    res.noDelete++;
+    return res
+}
+
 int main(int argc, char **argv)
 {
     cout << "test\n";
@@ -864,6 +875,12 @@ int main(int argc, char **argv)
         for (int i = 0; i < 10000; i++)
         {
             cout << c.data[i] << " ";
+        }
+        Matrix d=load("TEST.MTR");
+        cout << endl << "loaded duplicate:";
+        for (int i = 0; i < 10000; i++)
+        {
+            cout << d.data[i] << " ";
         }
         cout << endl
              << "WOOOOOOOO PASSSSSSSS!!!\n";
