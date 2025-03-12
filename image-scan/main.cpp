@@ -867,18 +867,18 @@ int main(int argc, char **argv)
         a.load();
         b.load();
         cout << "Loaded!" << endl;
-        Matrix c(1,100,true);
+        Matrix c(1,10,true);
         c.heInit();
         c.gpuPull();
         dump(c,"TEST.MTR");
         cout << "Result: ";
-        for (int i = 0; i < 10000; i++)
+        for (int i = 0; i < 10; i++)
         {
             cout << c.data[i] << " ";
         }
         Matrix d=load("TEST.MTR");
         cout << endl << "loaded duplicate:";
-        for (int i = 0; i < 10000; i++)
+        for (int i = 0; i < 10; i++)
         {
             cout << d.data[i] << " ";
         }
