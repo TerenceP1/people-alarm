@@ -856,7 +856,7 @@ int main(int argc, char **argv)
         a.load();
         b.load();
         cout << "Loaded!" << endl;
-        Matrix c(100,100,true);
+        Matrix c(1,100,true);
         c.heInit();
         c.gpuPull();
         dump(c,"TEST.MTR");
