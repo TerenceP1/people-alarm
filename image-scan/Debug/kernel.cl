@@ -116,3 +116,8 @@ kernel void dsig(global matrix *a, global matrix *b) {
   float tmp=1.0f / (1.0f + exp(-itm));
   (&(b->data))[ind] = tmp * (1.0f - tmp);
 }
+
+kernel void mlt2(global matrix *a, global matrix *b, global matrix *c) {
+  int ind = get_global_id(0);
+  (&(c->data))[ind] = (&(a->data))[ind] * (&(b->data))[ind];
+}
