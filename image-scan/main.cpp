@@ -910,10 +910,10 @@ int main(int argc, char **argv)
     {
         Matrix a(2, 2, false);
         Matrix b(2, 2, false);
-        a.data[0] = 0.2;
-        a.data[1] = 0.4;
-        a.data[2] = 0.6;
-        a.data[3] = 0.8;
+        a.data[0] = 1;
+        a.data[1] = 2;
+        a.data[2] = 3;
+        a.data[3] = 4;
         b.data[0] = 5;
         b.data[1] = 6;
         b.data[2] = 7;
@@ -921,8 +921,7 @@ int main(int argc, char **argv)
         a.load();
         b.load();
         cout << "Loaded!" << endl;
-        Matrix c(1,10,true);
-        c.heInit();
+        Matrix c=a^b;
         c.gpuPull();
         dump(c,"TEST.MTR");
         cout << "Result: ";
