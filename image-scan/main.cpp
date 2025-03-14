@@ -691,6 +691,60 @@ public:
         res.noDelete++;
         return res;
     }
+
+    Matrix operator^(Matrix &a)
+    {
+        if (!((rows == a.rows) && (cols == a.cols)))
+        {
+            cerr << "MLT2 FAILED BECAUSE OF DIMENSION MISMATCH!!!\n";
+            exit(1);
+        }
+        if (!isLoaded)
+        {
+            load();
+        }
+        if (!(a.isLoaded))
+        {
+            a.load();
+        }
+        Matrix res(rows, cols, true);
+        cl_kernel kernel = clCreateKernel(
+            program,
+            "mlt2",
+            NULL);
+        clSetKernelArg(
+            kernel,
+            0,
+            sizeof(cl_mem),
+            &tBuf);
+        clSetKernelArg(
+            kernel,
+            1,
+            sizeof(cl_mem),
+            &(a.tBuf));
+        clSetKernelArg(
+            kernel,
+            2,
+            sizeof(cl_mem),
+            &(res.tBuf));
+        size_t wSz = a.rows * cols;
+        clEnqueueNDRangeKernel(
+            queue2,
+            kernel,
+            1,
+            NULL,
+            &wSz,
+            NULL,
+            0,
+            NULL,
+            NULL);
+        clFlush(queue2);
+        clFinish(queue2);
+        clReleaseKernel(kernel);
+        cout << "Pls no destructor here." << endl;
+        res.noDelete++;
+        return res;
+    }
 };
 
 string slurp(string nm)
