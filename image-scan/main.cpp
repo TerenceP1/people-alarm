@@ -929,7 +929,7 @@ int main(int argc, char **argv)
     bool blah = true;
     if (blah)
     {
-        Matrix a(2, 2, false);
+       /* Matrix a(2, 2, false);
         Matrix b(2, 2, false);
         a.data[0] = 1;
         a.data[1] = 2;
@@ -956,6 +956,13 @@ int main(int argc, char **argv)
         for (int i = 0; i < 4; i++)
         {
             cout << d.data[i] << " ";
+        }*/
+        ifstream in("conf.txt");
+        int cmd;
+        in >> cmd;
+        if (cmd==0){
+            int sqsz,layers;
+            in >> sqsz >> layers;
         }
         cout << endl
              << "WOOOOOOOO PASSSSSSSS!!!\n";
