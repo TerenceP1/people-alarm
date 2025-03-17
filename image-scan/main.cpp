@@ -946,13 +946,14 @@ int main(int argc, char **argv)
         c.gpuPull();
         dump(c,"TEST.MTR");
         cout << "Result: ";
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < 4; i++)
         {
             cout << c.data[i] << " ";
         }
         Matrix d=load("TEST.MTR");
+        Matrix e=d.copy();
         cout << endl << "loaded duplicate:";
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < 4; i++)
         {
             cout << d.data[i] << " ";
         }
