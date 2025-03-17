@@ -745,6 +745,27 @@ public:
         res.noDelete++;
         return res;
     }
+
+    Matrix copy()
+    {
+        if (!isLoaded)
+        {
+            load();
+        }
+        Matrix res(rows, cols, true);
+        clEnqueueCopyBuffer(
+            queue2,
+            tBuf,
+            res.tBuf,
+            0,
+            0,
+            sizeof(matrix) + sizeof(float) * (rows * cols - 1),
+            NULL,NULL,NULL
+        );
+        cout << "Pls no destructor here." << endl;
+        res.noDelete++;
+        return res;
+    }
 };
 
 string slurp(string nm)
