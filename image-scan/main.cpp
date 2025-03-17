@@ -746,7 +746,7 @@ public:
         return res;
     }
 
-    Matrix copy()
+    Matrix copy2()
     {
         if (!isLoaded)
         {
@@ -951,7 +951,7 @@ int main(int argc, char **argv)
             cout << c.data[i] << " ";
         }
         Matrix d=load("TEST.MTR");
-        Matrix e=d.copy();
+        Matrix e=d.copy2();
         cout << endl << "loaded duplicate:";
         for (int i = 0; i < 4; i++)
         {
