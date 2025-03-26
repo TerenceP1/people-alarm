@@ -12,6 +12,7 @@
 #include <sstream>
 #include <vector>
 #include <algorithm>
+#include <string>
 #pragma comment(lib, "Winmm.lib")
 using namespace std;
 
@@ -552,7 +553,7 @@ public:
             sizeof(cl_mem),
             &tBuf);
         size_t wSz = rows * cols;
-        unsigned int twSz=4;
+        unsigned int twSz = rows;
         clSetKernelArg(
             kernel,
             1,
@@ -590,7 +591,7 @@ public:
             sizeof(cl_mem),
             &tBuf);
         size_t wSz = rows * cols;
-        unsigned int twSz=wSz;
+        unsigned int twSz = rows + cols;
         clSetKernelArg(
             kernel,
             1,
@@ -801,6 +802,17 @@ Matrix load(string fn){
     return res;
 }
 
+void printer(Matrix a){
+    cout << "Size: " << a.rows << 'x' << a.cols << endl;
+    for (int i=0;i<a.rows;i++){
+        for (int j=0;j<a.cols;j++){
+            cout << a.data[j+i*a.cols] << ' ';
+        }
+        cout << endl;
+    }
+    a.noDelete++;
+}
+
 int main(int argc, char **argv)
 {
     cout << "test\n";
@@ -961,8 +973,21 @@ int main(int argc, char **argv)
         int cmd;
         in >> cmd;
         if (cmd==0){
-            int sqsz,layers;
+            int sqsz,layers; // layers refers to number of input and hidden layers (hidden plus one)
             in >> sqsz >> layers;
+            for (int i=0;i<layers-1;i++){
+                Matrix cWeights(sqsz*sqsz,sqsz*sqsz,true);
+                cWeights.heInit();
+                cWeights.gpuPull();
+                dump(cWeights,(string)("weights/w")+to_string(i)+".mtr");
+                Matrix cBias(sqsz*sqsz,1,false);
+                for (int i=0;i<sqsz*sqsz;i++){cBias.data[i]=0.0f;}
+                cout << "Dump of weights/w" << to_string(i) << ".mtr:\n";
+                printer(cWeights);
+                dump(cWeights,"biases/b"+to_string(i)+".mtr");
+                cout << "Dump of weights/w" << to_string(i) << ".mtr:\n";
+                printer(cWeights);
+            }
         }
         cout << endl
              << "WOOOOOOOO PASSSSSSSS!!!\n";
