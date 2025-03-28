@@ -563,7 +563,7 @@ public:
             &twSz);
         unsigned int seed;
         BCRYPT_ALG_HANDLE crypto;
-        BCryptOpenAlgorithmProvider(&crypto,"RNG",NULL,0);
+        BCryptOpenAlgorithmProvider(&crypto,L"RNG",NULL,0);
         BCryptGenRandom(crypto,(PUCHAR)&seed,sizeof(seed),0);
         clSetKernelArg(
             kernel,
@@ -612,7 +612,7 @@ public:
         
         unsigned int seed;
         BCRYPT_ALG_HANDLE crypto;
-        BCryptOpenAlgorithmProvider(&crypto,"RNG",NULL,0);
+        BCryptOpenAlgorithmProvider(&crypto,L"RNG",NULL,0);
         BCryptGenRandom(crypto,(PUCHAR)&seed,sizeof(seed),0);
         clSetKernelArg(
             kernel,
