@@ -13,6 +13,8 @@
 #include <vector>
 #include <algorithm>
 #include <string>
+#include "imapi2.h"
+#include "bcrypt.h"
 #pragma comment(lib, "Winmm.lib")
 using namespace std;
 
@@ -559,6 +561,16 @@ public:
             1,
             sizeof(unsigned int),
             &twSz);
+        unsigned int seed;
+        BCRYPT_ALG_HANDLE crypto;
+        BCryptOpenAlgorithmProvider(&crypto,"RNG",NULL,0);
+        BCryptGenRandom(crypto,(PUCHAR)&seed,sizeof(seed),0);
+        clSetKernelArg(
+            kernel,
+            2,
+            sizeof(unsigned int),
+            &seed);
+        BCryptCloseAlgorithmProvider(crypto,0);
         clEnqueueNDRangeKernel(
             queue2,
             kernel,
@@ -597,6 +609,14 @@ public:
             1,
             sizeof(unsigned int),
             &twSz);
+        BCryptOpenAlgorithmProvider(&crypto,"RNG",NULL,0);
+        BCryptGenRandom(crypto,(PUCHAR)&seed,sizeof(seed),0);
+        clSetKernelArg(
+            kernel,
+            2,
+            sizeof(unsigned int),
+            &seed);
+        BCryptCloseAlgorithmProvider(crypto,0);
         clEnqueueNDRangeKernel(
             queue2,
             kernel,
