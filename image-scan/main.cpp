@@ -16,6 +16,7 @@
 #include "imapi2.h"
 #include "bcrypt.h"
 #pragma comment(lib, "Winmm.lib")
+#pragma comment(lib, "Bcrypt.lib")
 using namespace std;
 
 cl_program program;
