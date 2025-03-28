@@ -80,10 +80,10 @@ uint randomInt(uint ind){
   return tmp;
 }
 
-kernel void heInit(global matrix* a, int nrs){
+kernel void heInit(global matrix* a, int nrs, uint seed){
   // He initialization
   // nrs is number of neurons
-  uint ind=get_global_id(0);
+  uint ind=get_global_id(0)+seed;
   float u1=((float)(randomInt(ind)>>8))/((float)0x1000000);
   float u2=((float)(randomInt(ind*1664525u+1013904223u)>>8))/((float)0x1000000);
   printf("u1: %f",u1);
@@ -91,10 +91,10 @@ kernel void heInit(global matrix* a, int nrs){
   (&(a->data))[ind]=sqrt(-2.0f*log(u1))*cospi(2.0f*u2)*sqrt(2.0f/((float)nrs));
 }
 
-kernel void xInit(global matrix* a, int nrs){
+kernel void xInit(global matrix* a, int nrs, uint seed){
   // Xavier initialization
   // nrs is number of neurons
-  uint ind=get_global_id(0);
+  uint ind=get_global_id(0)+seed;
   float u1=((float)(randomInt(ind)>>8))/((float)0x1000000);
   float u2=((float)(randomInt(ind*1664525u+1013904223u)>>8))/((float)0x1000000);
   printf("u1: %f",u1);
