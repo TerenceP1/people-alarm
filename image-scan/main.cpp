@@ -609,6 +609,9 @@ public:
             1,
             sizeof(unsigned int),
             &twSz);
+        
+        unsigned int seed;
+        BCRYPT_ALG_HANDLE crypto;
         BCryptOpenAlgorithmProvider(&crypto,"RNG",NULL,0);
         BCryptGenRandom(crypto,(PUCHAR)&seed,sizeof(seed),0);
         clSetKernelArg(
